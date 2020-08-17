@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <string name="error_message">Error loading data. Please try again!!</string>
+    <string name="alt_text">Movie picture</string>
+    <string name="filter_by_top_rated">Top Rated</string>
+    <string name="filter_by_most_popular">Most Popular</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="synopsis">this is the synopsis</string>
+    <string name="textview">TextView</string>
+    <string name="_10_10">10/10</string>
+
+</resources>

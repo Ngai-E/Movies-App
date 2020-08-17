@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_Movies"
+        style="@style/match_match_parent"
+        tools:listitem="@layout/movies_item" />
+
+    <TextView
+        android:id="@+id/tv_error_message_display"
+        android:text="@string/error_message"
+        style="@style/error_text_view" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_indicator"
+        style="@style/progress_bar" />
+
+</FrameLayout>

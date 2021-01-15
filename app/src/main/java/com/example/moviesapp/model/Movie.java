@@ -17,7 +17,8 @@ import java.util.List;
 
 public class Movie implements Serializable {
     public static final String  BASE_URL = "https://api.themoviedb.org/3";
-    public static final String  TOKEN = "<YOUR API KEY>";
+//    public static final String  TOKEN = "<YOUR API KEY>";
+    public static final String  TOKEN = "e6141af8eb1ab2f2e74e482264fce476";
     public static final String  SORT_PARAM_NAME = "sort_by";
     public static final String  TOKEN_PARAM_NAME = "api_key";
     public static final String  ENDPOINT_BY_POPULAR = "movie/popular";

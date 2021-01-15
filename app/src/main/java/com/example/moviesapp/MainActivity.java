@@ -1,8 +1,6 @@
 package com.example.moviesapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,21 +8,15 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
-
+import com.example.moviesapp.adapters.MoviesAdapter;
 import com.example.moviesapp.databinding.ActivityMainBinding;
 import com.example.moviesapp.model.Movie;
 import com.example.moviesapp.utitilities.MovieNetworkUtils;
@@ -37,13 +29,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MoviesAdapter.HandleClickListener, LoaderManager.LoaderCallbacks<JSONObject> {
     private ActivityMainBinding binding;
-    private RecyclerView recyclerView;
     private  MoviesAdapter moviesAdapter;
     private  static  final char TOP_RATED = 'R';
     private  static  final char MOST_POPULAR = 'p';
     private char filter = MOST_POPULAR; //P or R
     private static final String MOVIE_SORT_ORDER = "sort_by";
     private  static final int MOVIE_LOADER = 22;
+    public  static  final String  RESULTS = "results";
 
 
     @Override
@@ -53,13 +45,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Han
         binding  = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_Movies);
         StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setHasFixedSize(true);
+        binding.recyclerviewMovies.setLayoutManager(gridLayoutManager);
+        binding.recyclerviewMovies.setHasFixedSize(true);
 
         moviesAdapter = new MoviesAdapter(this);
-        recyclerView.setAdapter(moviesAdapter);
+        binding.recyclerviewMovies.setAdapter(moviesAdapter);
         getSupportLoaderManager().initLoader(MOVIE_LOADER, null, this);
         loadData();
     }
@@ -82,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Han
         int menuItemSelected = item.getItemId();
         switch (menuItemSelected) {
             case R.id.most_popular:
-                this.filter = 'P';
+                this.filter = MOST_POPULAR;
                 break;
             case R.id.top_rated:
-                this.filter = 'R';
+                this.filter = TOP_RATED;
                 break;
         }
         this.loadData();
@@ -94,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Han
 
     private  void loadData() {
         showMovies();
-        String sort_by  =  String.valueOf(this.filter);
+        String sort_by_value  =  String.valueOf(this.filter);
 
         Bundle bundle = new Bundle();
-        bundle.putString(MOVIE_SORT_ORDER, sort_by);
+        bundle.putString(MOVIE_SORT_ORDER, sort_by_value);
 
         LoaderManager loaderManager = getSupportLoaderManager();
         Loader loader = loaderManager.getLoader(MOVIE_LOADER);
@@ -180,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Han
         if (movieJson != null) {
             showMovies();
             try {
-                System.out.println(movieJson.getJSONArray("results"));
-                List<Movie> movies = Movie.createMovies(movieJson.getJSONArray("results"));
+                System.out.println(movieJson.getJSONArray(RESULTS));
+                List<Movie> movies = Movie.createMovies(movieJson.getJSONArray(RESULTS));
                 moviesAdapter.setMoviesData(movies);
             } catch (JSONException e) {
                 e.printStackTrace();

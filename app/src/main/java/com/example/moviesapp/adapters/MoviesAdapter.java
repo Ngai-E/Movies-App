@@ -1,16 +1,15 @@
-package com.example.moviesapp;
+package com.example.moviesapp.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.example.moviesapp.R;
 import com.example.moviesapp.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -59,7 +58,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             return moviesData.size();
         }
     }
-    interface  HandleClickListener {
+    public interface  HandleClickListener {
         void onClick(Movie movie);
     }
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

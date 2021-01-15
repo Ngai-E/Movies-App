@@ -55,5 +55,38 @@
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginRight="@dimen/text_margin"
         android:text="@string/synopsis"/>
+
+    <View style="@style/horizontal_separator"/>
+    <TextView
+        style="@style/wrap_wrap_content"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:text="@string/trailers"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/trailer_recycler"
+        style="@style/match_match_parent"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"
+        tools:listitem="@layout/trailer_item"/>
+
+    <View style="@style/horizontal_separator"/>
+    <TextView
+        style="@style/wrap_wrap_content"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:text="@string/reviews"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reviews_recyler"
+        style="@style/match_match_parent"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"
+        tools:listitem="@layout/reviews_item">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </ScrollView>
